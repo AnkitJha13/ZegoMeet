@@ -1,3 +1,6 @@
+// Define the base URL once at the top
+const baseURL = 'https://videocall-app-dusv.onrender.com';
+
 function handleRegistration(event) {
     event.preventDefault();
 
@@ -14,24 +17,28 @@ function handleRegistration(event) {
         password: password,
         status: status,
     };
-    fetch('https://videocall-app-dusv.onrender.com/api/v1/users', {
+
+    // Use the baseURL for the registration API
+    fetch(`${baseURL}/api/v1/users`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
-    }).then(response => {
+    })
+    .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         return response;
-    }).then(() => {
+    })
+    .then(() => {
         localStorage.setItem("connectedUser", JSON.stringify(user));
         window.location.href = "index.html";
-    }).catch(error => {
+    })
+    .catch(error => {
         console.error('POST request error:', error);
     });
-
 }
 
 // Attach the handleRegistration function to the form's submit event

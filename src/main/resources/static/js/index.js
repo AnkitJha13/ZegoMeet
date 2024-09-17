@@ -1,5 +1,7 @@
-function loadAndDisplayUsers() {
+// Define the base URL once at the top
+const baseURL = 'https://videocall-app-dusv.onrender.com';
 
+function loadAndDisplayUsers() {
     // check if the user is connected
     const connectedUser = localStorage.getItem('connectedUser');
     if (!connectedUser) {
@@ -7,12 +9,12 @@ function loadAndDisplayUsers() {
         return;
     }
 
-
     const userListElement = document.getElementById("userList");
     // Clear any existing content in the userListElement
     userListElement.innerHTML = "Loading...";
-    // Retrieve the userList from Local Storage
-    fetch('https://videocall-app-dusv.onrender.com/api/v1/users')
+
+    // Use the baseURL for fetching users
+    fetch(`${baseURL}/api/v1/users`)
         .then((response) => {
             return response.json();
         })
@@ -42,10 +44,8 @@ function displayUsers(userList, userListElement) {
 // Call the loadAndDisplayUsers function when the page loads
 window.addEventListener("load", loadAndDisplayUsers);
 
-
-
 function handleLogout() {
-    fetch('https://videocall-app-dusv.onrender.com/api/v1/users/logout', {
+    fetch(`${baseURL}/api/v1/users/logout`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -64,22 +64,23 @@ function handleLogout() {
 const logoutBtn = document.getElementById("logoutBtn");
 logoutBtn.addEventListener("click", handleLogout);
 
-
 function handleNewMeeting() {
     const connectedUser = JSON.parse(localStorage.getItem('connectedUser'));
-    window.open(`videocall.html?username=${connectedUser.username}`, "_blank");
+    
+    // Use the baseURL for the video call
+    window.open(`${baseURL}/videocall.html?username=${connectedUser.username}`, "_blank");
 }
 
 // Attach the handleNewMeeting function to the "Create a New Meeting" button
 const newMeetingBtn = document.getElementById("newMeetingBtn");
 newMeetingBtn.addEventListener("click", handleNewMeeting);
 
-
 function handleJoinMeeting() {
     const roomId = document.getElementById("meetingName").value;
     const connectedUser = JSON.parse(localStorage.getItem('connectedUser'));
 
-    const url = `videocall.html?roomID=${roomId}&username=${connectedUser.username}`;
+    // Use the baseURL for joining a video call
+    const url = `${baseURL}/videocall.html?roomID=${roomId}&username=${connectedUser.username}`;
 
     window.open(url, "_blank");
 }

@@ -1,3 +1,6 @@
+// Define the base URL once at the top
+const baseURL = 'https://videocall-app-dusv.onrender.com';
+
 function handleLogin(event) {
   event.preventDefault();
 
@@ -9,7 +12,8 @@ function handleLogin(event) {
     password: password
   };
 
-  fetch("https://videocall-app-dusv.onrender.com/api/v1/users/login", {
+  // Use the baseURL for the login API
+  fetch(`${baseURL}/api/v1/users/login`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
