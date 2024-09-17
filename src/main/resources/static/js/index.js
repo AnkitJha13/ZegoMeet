@@ -12,7 +12,7 @@ function loadAndDisplayUsers() {
     // Clear any existing content in the userListElement
     userListElement.innerHTML = "Loading...";
     // Retrieve the userList from Local Storage
-    fetch('https://videocallapp-deployement-1.onrender.com/api/v1/users')
+    fetch('https://videocall-app-dusv.onrender.com/api/v1/users')
         .then((response) => {
             return response.json();
         })
@@ -45,7 +45,7 @@ window.addEventListener("load", loadAndDisplayUsers);
 
 
 function handleLogout() {
-    fetch('https://videocallapp-deployement-1.onrender.com/api/v1/users/logout', {
+    fetch('https://videocall-app-dusv.onrender.com/api/v1/users/logout', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

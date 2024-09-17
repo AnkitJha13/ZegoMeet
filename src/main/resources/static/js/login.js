@@ -9,7 +9,7 @@ function handleLogin(event) {
     password: password
   };
 
-  fetch("https://videocallapp-deployement-1.onrender.com/api/v1/users/login", {
+  fetch("https://videocall-app-dusv.onrender.com/api/v1/users/login", {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
